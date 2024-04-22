@@ -3,6 +3,11 @@ if (!require('lubridate')) install.packages('lubridate')
 library(lubridate)
 library(readxl)
 
+### PARA VISUALIZAR LOS RESULTADOS
+if (!require('ggplot2')) install.packages('ggplot2')
+library(ggplot2)
+library(htmltools)
+
 # Fecha actual
 fecha_hoy <- Sys.Date()
 
@@ -166,17 +171,6 @@ data_final <- data.frame(
 
 
 
-### PARA VISUALIZAR LOS RESULTADOS
-if (!require('shiny')) install.packages('shiny')
-if (!require('ggplot2')) install.packages('ggplot2')
-if (!require('shinydashboard')) install.packages('shinydashboard')
-library(shiny)
-library(ggplot2)
-library(shinydashboard)
-library(ggplot2)
-library(htmltools)
-
-
 
 # Generar la tabla HTML
 tabla_html <- withTags(table(
@@ -233,81 +227,5 @@ ggplot_bar <- ggplot(data_barras, aes(x = data_barras, y = Freq, fill = data_bar
 
 # Guardar el gráfico de barras
 ggsave("bar_chart.png", plot = ggplot_bar, width = 10, height = 8, units = "in")
-
-
-
-##      VISUALIZACIÓN EN SHINY
-
-# UI
-ui <- dashboardPage(
-  dashboardHeader(title = paste(num_polizas," Pólizas ",n," años")),
-  dashboardSidebar(
-    h3("Pólizas a vencer"),
-    tableOutput("tablaPolizas")
-  ),
-  dashboardBody(
-    fluidRow(
-      box(
-        title = paste("Reserva a fin de", anio_hoy),
-        status = "primary",
-        solidHeader = TRUE,
-        width = 6,
-        htmlOutput("reservaFinal")
-      ),
-      box(
-        title = paste("Reserva de ", anio_hoy),
-        status = "warning",
-        solidHeader = TRUE,
-        width = 6,
-        htmlOutput("reservaPrimas")
-      )
-    ),
-    fluidRow(
-      plotOutput("pieChart"),
-      plotOutput("barChart")
-    )
-  )
-)
-
-# Server
-server <- function(input, output) {
-  # Output para el cuadro de texto de la reserva total
-  output$reservaFinal <- renderUI({
-    HTML(paste("<h3>$", R_TOTAL, "</h3>"))
-  })
-  
-  # Output para el cuadro de texto de la reserva de anual
-  output$reservaPrimas <- renderUI({
-    HTML(paste("<h3>$", R_F_CAL, "</h3>"))
-  })
-  
-  # Output para el diagrama de torta
-  output$pieChart <- renderPlot({
-    ggplot(data_pie, aes(x = "", y = Freq, fill = factor(sexos))) +
-      geom_bar(width = 1, stat = "identity") +
-      geom_text(aes(label = paste0(Percentage, "%")), position = position_stack(vjust = 0.5)) +
-      coord_polar("y", start = 0) +
-      theme_void() +
-      labs(fill = "Sexo") +
-      scale_fill_discrete(name = "Sexos", labels = c("Hombres", "Mujeres"))
-  })
-  
-  # Output para el diagrama de barras
-  output$barChart <- renderPlot({
-    ggplot(data_barras, aes(x = data_barras, y = Freq, fill = data_barras)) +
-      geom_bar(stat = "identity") +
-      geom_text(aes(label = paste0(Percentage, "%")), vjust = -0.5, color = "black") +
-      labs(x = "Décadas de edad", y = "Cantidad", fill = "Rango de edad") +
-      theme_minimal()
-  })
-  
-  # Output para la tabla del dataframe
-  output$tablaPolizas <- renderTable({
-    data_final
-  })
-}
-
-# Correr la aplicación
-shinyApp(ui = ui, server = server)
 
 

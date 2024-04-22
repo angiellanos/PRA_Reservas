@@ -118,12 +118,141 @@ for (pol in 1:num_polizas){
   df[[paste("R_poliza", pol, sep = "_")]][row_fecha+n] = indemnizaciones[pol] 
 }
 
-row_fecha_cal  <- which( df$Fecha == as.integer(format(fecha_hoy,"%Y")))
+anio_hoy <- as.integer(format(fecha_hoy,"%Y"))
+row_fecha_cal  <- which( df$Fecha == anio_hoy)
+# Formateo de los números para incluir separadores de miles y un decimal
+formato_numerico <- function(numero) {
+  numero <- as.numeric(numero)
+  return(format(round(numero, 1), big.mark = ",", decimal.mark = ".", nsmall = 1, scientific = FALSE))
+}
+
+
 
 # RESERVA TOTAL AL AÑO DE CÁLCULO (2024)
 R_TOTAL <- sum(df[row_fecha_cal, ], na.rm = TRUE)
+R_TOTAL <- formato_numerico(R_TOTAL)
 
 # Reserva realizada en 2024 acorde a las primas
 R_F_CAL <- sum(df_desagregado[row_fecha_cal, ], na.rm = TRUE)
+R_F_CAL <- formato_numerico(R_F_CAL)
+
+
+
+
+## Contruir dataFrame con frecuencia de vencimiento por año
+# Inicializar un vector para almacenar el recuento de pólizas que terminan cada año
+contador_polizas <- rep(0, max(df$Fecha) - anio_hoy + 1)
+cantidad_asegurada <- rep(0, max(df$Fecha) - anio_hoy + 1)
+nombres <- anio_hoy:max(df$Fecha)
+
+# Iterar sobre las columnas de pólizas en el dataframe
+for(i in 2:ncol(df)) {
+  # Encontrar el último año no-NA en la póliza actual
+  ultimo_año <- tail(df[!is.na(df[[i]]), 'Fecha'], 1)
+  if(length(ultimo_año) > 0) { # Comprobar si hay al menos un año no-NA
+    # Incrementar el contador para el año encontrado
+    contador_polizas[ultimo_año - anio_hoy + 1] <- contador_polizas[ultimo_año - anio_hoy + 1] + 1
+    cantidad_asegurada[ultimo_año - anio_hoy + 1] <- cantidad_asegurada[ultimo_año - anio_hoy + 1] + df[which( df$Fecha == ultimo_año),i]
+  }
+}
+
+cantidad_asegurada <- sapply(cantidad_asegurada, formato_numerico)
+# Crear el dataframe final con los años y el recuento de pólizas
+data_final <- data.frame(
+  Año = nombres,
+  Cantidad = contador_polizas,
+  Valor_Pagar = cantidad_asegurada
+)
+
+
+
+### PARA VISUALIZAR LOS RESULTADOS
+if (!require('shiny')) install.packages('shiny')
+if (!require('ggplot2')) install.packages('ggplot2')
+if (!require('shinydashboard')) install.packages('shinydashboard')
+library(shiny)
+library(ggplot2)
+library(shinydashboard)
+
+# Crear un dataframe para la visualización de sexos
+data_pie <- as.data.frame(table(sexos))
+data_pie$Percentage <- round((data_pie$Freq / sum(data_pie$Freq)) * 100, 1)
+
+# Crear un dataframe para la visualización de edades
+data_barras <- cut(edades, breaks = seq(20, 80, by = 10), right = FALSE, labels = paste(seq(20, 70, by = 10), seq(29, 79, by = 10), sep = "-"))
+data_barras <- as.data.frame(table(data_barras))
+data_barras$Percentage <- round((data_barras$Freq / sum(data_barras$Freq)) * 100, 1)
+
+# UI
+ui <- dashboardPage(
+  dashboardHeader(title = paste(num_polizas," Pólizas ",n," años")),
+  dashboardSidebar(
+    h3("Pólizas a vencer"),
+    tableOutput("tablaPolizas")
+  ),
+  dashboardBody(
+    fluidRow(
+      box(
+        title = paste("Reserva a fin de", anio_hoy),
+        status = "primary",
+        solidHeader = TRUE,
+        width = 6,
+        htmlOutput("reservaFinal")
+      ),
+      box(
+        title = paste("Reserva de ", anio_hoy),
+        status = "warning",
+        solidHeader = TRUE,
+        width = 6,
+        htmlOutput("reservaPrimas")
+      )
+    ),
+    fluidRow(
+      plotOutput("pieChart"),
+      plotOutput("barChart")
+    )
+  )
+)
+
+# Server
+server <- function(input, output) {
+  # Output para el cuadro de texto de la reserva total
+  output$reservaFinal <- renderUI({
+    HTML(paste("<h3>$", R_TOTAL, "</h3>"))
+  })
+  
+  # Output para el cuadro de texto de la reserva de anual
+  output$reservaPrimas <- renderUI({
+    HTML(paste("<h3>$", R_F_CAL, "</h3>"))
+  })
+  
+  # Output para el diagrama de torta
+  output$pieChart <- renderPlot({
+    ggplot(data_pie, aes(x = "", y = Freq, fill = factor(sexos))) +
+      geom_bar(width = 1, stat = "identity") +
+      geom_text(aes(label = paste0(Percentage, "%")), position = position_stack(vjust = 0.5)) +
+      coord_polar("y", start = 0) +
+      theme_void() +
+      labs(fill = "Sexo") +
+      scale_fill_discrete(name = "Sexos", labels = c("Hombres", "Mujeres"))
+  })
+  
+  # Output para el diagrama de barras
+  output$barChart <- renderPlot({
+    ggplot(data_barras, aes(x = data_barras, y = Freq, fill = data_barras)) +
+      geom_bar(stat = "identity") +
+      geom_text(aes(label = paste0(Percentage, "%")), vjust = -0.5, color = "black") +
+      labs(x = "Décadas de edad", y = "Cantidad", fill = "Rango de edad") +
+      theme_minimal()
+  })
+  
+  # Output para la tabla del dataframe
+  output$tablaPolizas <- renderTable({
+    data_final
+  })
+}
+
+# Correr la aplicación
+shinyApp(ui = ui, server = server)
 
 

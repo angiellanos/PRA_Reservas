@@ -173,15 +173,70 @@ if (!require('shinydashboard')) install.packages('shinydashboard')
 library(shiny)
 library(ggplot2)
 library(shinydashboard)
+library(ggplot2)
+library(htmltools)
+
+
+
+# Generar la tabla HTML
+tabla_html <- withTags(table(
+  thead(
+    tr(
+      lapply(names(data_final), th)
+    )
+  ),
+  tbody(
+    lapply(1:nrow(data_final), function(i) {
+      tr(
+        lapply(data_final[i, ], td)
+      )
+    })
+  )
+))
+
+# Guardar la tabla HTML en un archivo
+writeLines(as.character(tabla_html), "tabla.html")
+
+
+
+
+
 
 # Crear un dataframe para la visualización de sexos
 data_pie <- as.data.frame(table(sexos))
 data_pie$Percentage <- round((data_pie$Freq / sum(data_pie$Freq)) * 100, 1)
 
+# Gráfico circular
+pie_chart <- ggplot(data_pie, aes(x = "", y = Freq, fill = factor(sexos))) +
+  geom_bar(width = 1, stat = "identity") +
+  geom_text(aes(label = paste0(Percentage, "%")), position = position_stack(vjust = 0.5)) +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  labs(fill = "Sexos") +
+  scale_fill_discrete(labels = c("Hombres", "Mujeres"))
+
+# Guardar el gráfico circular como imagen
+ggsave("pie_chart.png", plot = pie_chart, width = 8, height = 6, units = "in")
+
+
 # Crear un dataframe para la visualización de edades
 data_barras <- cut(edades, breaks = seq(20, 80, by = 10), right = FALSE, labels = paste(seq(20, 70, by = 10), seq(29, 79, by = 10), sep = "-"))
 data_barras <- as.data.frame(table(data_barras))
 data_barras$Percentage <- round((data_barras$Freq / sum(data_barras$Freq)) * 100, 1)
+
+ggplot_bar <- ggplot(data_barras, aes(x = data_barras, y = Freq, fill = data_barras)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(Percentage, "%")), vjust = -0.5, color = "black") +
+  labs(x = "Décadas de edad", y = "Cantidad", title = "Distribución por Edad") +
+  scale_fill_brewer(palette = "Set1") +  # Paleta de colores
+  theme_minimal()
+
+# Guardar el gráfico de barras
+ggsave("bar_chart.png", plot = ggplot_bar, width = 10, height = 8, units = "in")
+
+
+
+##      VISUALIZACIÓN EN SHINY
 
 # UI
 ui <- dashboardPage(

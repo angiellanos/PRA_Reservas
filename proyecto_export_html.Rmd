@@ -1,19 +1,105 @@
 ---
-title: "proyectoPRA"
-author: "Jose Alejandro Ramírez- Juan Sebastian Hernandez"
+title: "NORMAS APLICABLES A LAS RESERVAS TÉCNICAS"
+author: "Jose Alejandro Ramírez - Angie Llanos Culma - Cristian Gonzalez Morales"
 date: "2024-04-21"
 output: html_document
 ---
+<style>
+p {
+  margin-bottom: 2em;
+}
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+#  Vida (seguro temporal n años)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## PASADO - RECLAMACIONES
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Reserva Avisados
+
+
+Según el decreto 2555 de 2010 es una reserva es de aplicación obligatoria para todos los ramos y deberá constituirse por siniestro y para cada cobertura, en la fecha en que la aseguradora tenga conocimiento, por cualquier medio, de la ocurrencia del siniestro y corresponderá a la mejor estimación técnica del costo de este. En aquellos ramos de seguros en los cuales al momento del aviso del siniestro no se conozca dicho costo, la valuación deberá consistir en una proyección de pagos futuros basada en estadísticas de pago de siniestros de años anteriores por cada tipo de cobertura.
+
+
+El monto de la reserva constituido se debe reajustar en la medida en que se cuente con más información y en caso de existir informes de liquidadores internos o externos los mismos deberán ser considerados. En todo caso, esta reserva se deberá actualizar mensualmente.
+
+
+La reserva deberá incluir los costos en que se incurre para atender la reclamación, incluidos los costos de honorarios de abogados para aquellos siniestros que se encuentren en proceso judicial. La Superintendencia Financiera de Colombia establecerá los lineamientos generales para el cómputo de los costos asociados al siniestro.
+
+
+La Superintendencia Financiera de Colombia establecerá parámetros adicionales para la constitución de esta reserva, en ramos o coberturas que se encuentren fuera de los lineamientos generalmente considerados de frecuencia y severidad o para los cuales la experiencia siniestral reciente no constituye una base de información suficiente para el cálculo.  
+
+
+Esta reserva se liberará en función del pago total o parcial del siniestro, incluidos los costos asociados al siniestro, reducción del valor estimado del siniestro, desistimientos y prescripciones
+
+
+
+### IBNR
+
+
+## FUTURO - PRIMAS
+
+
+### Reserva matemática
+
+
+según el Decreto 2555 de 2010, la reserva matemática se define como la reserva que tiene por objeto cubrir la valoración de las obligaciones estipuladas en las pólizas de seguros de vida individual, rentas vitalicias, capitalizaciones y aquellas que así lo determinen las normas vigentes. Se constituirá para los seguros de vida individual y para los amparos cuya prima se calcule en forma nivelada o seguros cuyo beneficio se pague en forma de renta. La Superintendencia Financiera determinará la obligación o no de constituir esta reserva para otros ramos de seguros.
+
+
+Según el artículo 2.31.4.3.2 del decreto 2973 de 2013, la reserva matemática debe ser establecida de manera individual para cada póliza y para cada tipo de cobertura. 
+
+
+Su cálculo se debe constituir póliza a póliza y amparo por amparo, y se determina por:
+
+
+$$
+VPA( \text{Obligaciones futuras de la aseguradora} ) - VPA( \text{Pagos futuros del asegurado})
+$$
+
+donde VPA denota el valor presente actuarial, calculados en la fecha específica de cálculo.  
+
+
+En la estimación de las obligaciones a cargo del asegurador se deben incluir los gastos de liquidación y administración no causados a la fecha de cálculo, así como la participación de utilidades y cualquier otro gasto asociado directamente a los compromisos asumidos en la póliza.
+
+
+El monto mínimo de esta reserva para cada póliza o amparo debe ser, en cualquier tiempo, igual al valor de rescate garantizado y en ningún momento podrá ser negativo.
+
+Esta reserva debe calcularse de acuerdo con lo establecido en la nota técnica depositada ante la Superintendencia Financiera de Colombia y con sujeción a las siguientes reglas:
+
+
+<p style="margin-left: 40px;">
+**a)** La tasa de interés técnico aplicada a las pólizas emitidas después de la entrada en vigor de este decreto se determinará en la fecha de emisión de cada póliza. Esta tasa será:
+$$
+Min(\text{ tasa utilizada cálculo prima },\text{tasa de mercado de referencia establecida por SFC })
+$$
+</p>
+
+<p style="margin-left: 40px;">
+**b)**	En los seguros de vida que incluyan un fondo de ahorro, se calculará una reserva adicional basada en el valor del fondo de ahorro y sus rendimientos, que se contabilizará por separado según las directrices de la SFC.
+</p>
+
+<p style="margin-left: 40px;">
+**c)**	Si se ofrece una rentabilidad garantizada u otra forma de garantía, estas deben ser consideradas en el cálculo de la reserva.
+</p>
+
+<p style="margin-left: 40px;">
+**d)**	Las tablas de mortalidad e invalidez utilizadas serán las establecidas por la SFC. Sin embargo, las aseguradoras podrán emplear tablas que reflejen su propia experiencia, previa presentación y aprobación por parte de la SFC.
+</p>
+
+
+La Superintendencia Financiera tendrá la facultad de determinar si otros tipos de seguros deben también constituir esta reserva o no.
+
+
+Ejemplo de reserva matemática [Reserva Matemática](R_Mat.html).
+
+
+
+
+
+
 
 ```{r cars}
 summary(cars)

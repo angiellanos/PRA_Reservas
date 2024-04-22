@@ -12,6 +12,9 @@ p {
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+# Establece la localización a inglés UTF-8 para evitar problemas de codificación
+Sys.setlocale("LC_ALL", "English_United States.UTF-8")
+
 ```
 
 #  Vida (seguro temporal n años)
@@ -21,23 +24,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Reserva Avisados
 
 
-Según el decreto 2555 de 2010 es una reserva es de aplicación obligatoria para todos los ramos y deberá constituirse por siniestro y para cada cobertura, en la fecha en que la aseguradora tenga conocimiento, por cualquier medio, de la ocurrencia del siniestro y corresponderá a la mejor estimación técnica del costo de este. En aquellos ramos de seguros en los cuales al momento del aviso del siniestro no se conozca dicho costo, la valuación deberá consistir en una proyección de pagos futuros basada en estadísticas de pago de siniestros de años anteriores por cada tipo de cobertura.
+Según la modificación del inciso primero del artículo 2.31.4.41 del decreto 2555 de 2010 por parte del decreto 1531 de 2022 la reserva de siniestros avisados es de aplicación obligatoria para todos los ramos y deberá constituirse por siniestro y para cada cobertura, en la fecha en que la aseguradora tenga conocimiento, por cualquier medio, de la ocurrencia del siniestro y corresponderá a la mejor estimación técnica del costo de este. Esta reserva debe incluir los costos directos e indirectos asociados a la gestión de los siniestros. El componente de costos indirectos se deberá constituir de manera agregada para cada ramo. En aquellos ramos de seguros en los cuales al momento del aviso del siniestro no se conozca dicho costo, la valuación deberá consistir en una proyección de pagos futuros basada en estadísticas de pago de siniestros de años anteriores por cada tipo de cobertura.
 
 
-El monto de la reserva constituido se debe reajustar en la medida en que se cuente con más información y en caso de existir informes de liquidadores internos o externos los mismos deberán ser considerados. En todo caso, esta reserva se deberá actualizar mensualmente.
-
-
-La reserva deberá incluir los costos en que se incurre para atender la reclamación, incluidos los costos de honorarios de abogados para aquellos siniestros que se encuentren en proceso judicial. La Superintendencia Financiera de Colombia establecerá los lineamientos generales para el cómputo de los costos asociados al siniestro.
-
-
-La Superintendencia Financiera de Colombia establecerá parámetros adicionales para la constitución de esta reserva, en ramos o coberturas que se encuentren fuera de los lineamientos generalmente considerados de frecuencia y severidad o para los cuales la experiencia siniestral reciente no constituye una base de información suficiente para el cálculo.  
+La Superintendencia Financiera de Colombia (SFC) establecerá parámetros adicionales para la constitución de esta reserva, en ramos o coberturas que se encuentren fuera de los lineamientos generalmente considerados de frecuencia y severidad o para los cuales la experiencia siniestral reciente no constituye una base de información suficiente para el cálculo.  
 
 
 Esta reserva se liberará en función del pago total o parcial del siniestro, incluidos los costos asociados al siniestro, reducción del valor estimado del siniestro, desistimientos y prescripciones
 
 
-
 ### IBNR
+
+
+Los seguros de vida temporales se distinguen por ser contratados para un periodo de tiempo específico y están diseñados para cubrir necesidades individuales de los asegurados. Estos seguros temporales pueden tener distintos períodos de vigencia pueden ir de uno, cinco, diez o más. Según las normativas actuales, los seguros de vida temporal están obligados a establecer una reserva matemática. Los seguros están exentos de formar la reserva para siniestros ocurridos, pero no avisados. Sin embargo, el artículo 1531 de 2022 que modifica el inciso a del artículo 2.31.4.4.6 del decreto 2555 de 2010 establece que dentro del ámbito de la aplicación la reserva de siniestros ocurridos no avisados, se incluyen específicamente los siguientes tipos de seguros: vida individual, amparos adicionales que requieran una prima nivelada o que tengan una reserva matemática asociada, así como fondos de ahorro. Sin embargo, se hace una excepción para los planes temporales, indicando que, independientemente de la metodología utilizada para calcular la prima, estos planes también deben constituir la reserva de siniestros ocurridos no avisados
+
+
 
 
 ## FUTURO - PRIMAS
@@ -46,7 +47,7 @@ Esta reserva se liberará en función del pago total o parcial del siniestro, in
 ### Reserva matemática
 
 
-según el Decreto 2555 de 2010, la reserva matemática se define como la reserva que tiene por objeto cubrir la valoración de las obligaciones estipuladas en las pólizas de seguros de vida individual, rentas vitalicias, capitalizaciones y aquellas que así lo determinen las normas vigentes. Se constituirá para los seguros de vida individual y para los amparos cuya prima se calcule en forma nivelada o seguros cuyo beneficio se pague en forma de renta. La Superintendencia Financiera determinará la obligación o no de constituir esta reserva para otros ramos de seguros.
+según el Decreto 2555 de 2010, la reserva matemática se define como la reserva que tiene por objeto cubrir la valoración de las obligaciones estipuladas en las pólizas de seguros de vida individual, rentas vitalicias, capitalizaciones y aquellas que así lo determinen las normas vigentes. Se constituirá para los seguros de vida individual y para los amparos cuya prima se calcule en forma nivelada o seguros cuyo beneficio se pague en forma de renta. La SFC determinará la obligación o no de constituir esta reserva para otros ramos de seguros.
 
 
 Según el artículo 2.31.4.3.2 del decreto 2973 de 2013, la reserva matemática debe ser establecida de manera individual para cada póliza y para cada tipo de cobertura. 
@@ -67,13 +68,13 @@ En la estimación de las obligaciones a cargo del asegurador se deben incluir lo
 
 El monto mínimo de esta reserva para cada póliza o amparo debe ser, en cualquier tiempo, igual al valor de rescate garantizado y en ningún momento podrá ser negativo.
 
-Esta reserva debe calcularse de acuerdo con lo establecido en la nota técnica depositada ante la Superintendencia Financiera de Colombia y con sujeción a las siguientes reglas:
+Esta reserva debe calcularse de acuerdo con lo establecido en la nota técnica depositada ante la SFC y con sujeción a las siguientes reglas:
 
 
 <p style="margin-left: 40px;">
 **a)** La tasa de interés técnico aplicada a las pólizas emitidas después de la entrada en vigor de este decreto se determinará en la fecha de emisión de cada póliza. Esta tasa será:
 $$
-Min(\text{ tasa utilizada cálculo prima },\text{tasa de mercado de referencia establecida por SFC })
+\min(\text{ tasa utilizada cálculo prima },\text{tasa de mercado de referencia establecida por SFC })
 $$
 </p>
 
@@ -90,7 +91,7 @@ $$
 </p>
 
 
-La Superintendencia Financiera tendrá la facultad de determinar si otros tipos de seguros deben también constituir esta reserva o no.
+La SFC tendrá la facultad de determinar si otros tipos de seguros deben también constituir esta reserva o no.
 
 
 Ejemplo de reserva matemática [Reserva Matemática](R_Mat.html).
@@ -98,19 +99,193 @@ Ejemplo de reserva matemática [Reserva Matemática](R_Mat.html).
 
 
 
+### Reserva por insuficiencia de activos 
+
+
+Es la reserva que deberán constituir las aseguradoras con el objeto de respaldar los pagos de sus obligaciones, en los casos en que los activos que conforman las reservas técnicas no sean suficiente de cubrirlas 
+La metodología de cálculo de la reserva por insuficiencia de activos, según lo establecido en el Decreto 2973 de 2013, implica constituir y ajustar esta reserva trimestralmente. 
+
+Se calcula como:
+
+$$
+VP( \text{deficiencias de activos por tramos} )
+$$
+donde, VP es el valor presente y Cada tramo representa una sección de tiempo específica durante la vigencia de los seguros. 
+
+La insuficiencia se determina en cada tramo como:
+
+$$
+flujos( \text{pasivos} ) - flujos( \text{activos} )
+$$
+
+La SFC se encarga de definir el procedimiento para calcular esta reserva, incluyendo aspectos como los activos y pasivos a considerar, sus flujos y el tratamiento respectivo, los tramos temporales para calcular las deficiencias, así como la tasa de descuento aplicable para determinar el valor presente de la insuficiencia.
+
+
+#### Ámbito de aplicación de la reserva por insuficiencia de activos. 
+
+Esta reserva es de aplicación obligatoria para los siguientes ramos de seguros: 
+
+<p style="margin-left: 40px;">
+ • 	Seguros de vida individual, así como cualquier extensión que haya sido calculada con una prima nivelada o que requiera una reserva matemática, y los fondos de ahorro asociados.
+</p>
+
+<p style="margin-left: 40px;">
+•	Pensiones de conformidad con la Ley 100
+</p>
+
+<p style="margin-left: 40px;">
+•	Pensiones que incluyan una opción de conmutación pensional.
+</p>
+
+<p style="margin-left: 40px;">
+•	Planes de pensiones voluntarias.
+</p>
+
+<p style="margin-left: 40px;">
+•	Seguros educativos.
+</p>
+
+<p style="margin-left: 40px;">
+•	Planes de rentas voluntarias.
+</p>
+
+<p style="margin-left: 40px;">
+•	Seguros de riesgos laborales.
+</p>
+
+
+#  Generales (automóviles)
+
+## PASADO - RECLAMACIONES
+
+### Reserva Avisados
+
+
+Equivalente a la reserva de avisados para el producto de vida (temporal a n años). Para más información consulte el inicio del documento.
 
 
 
-```{r cars}
-summary(cars)
-```
+### IBNR
 
-## Including Plots
+La reserva de siniestros ocurridos no avisados representa una estimación del monto de recursos que debe destinar la entidad aseguradora para atender los futuros pagos de siniestros que ya han ocurrido, a la fecha de cálculo de esta reserva, pero que todavía no han sido avisados a la entidad aseguradora o para los cuales no se cuenta con suficiente información.
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+Con la modificación del decreto 1531 de 2022 a los incisos primero y segundo del artículo 2.31.4.4.7 del decreto 2555 de 2010 la reserva se calculará por ramo, en forma mensual y comprende la estimación conjunta de los siniestros ocurridos no avisados y ocurridos no suficientemente avisados, netos de salvamentos y recobros.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Para la estimación de esta reserva, se deberán utilizar metodologías que tengan en cuenta el comportamiento de los siniestros o métodos validados técnicamente con suficiente desarrollo tanto teórico como práctico para esta estimación. 
+
+Esta reserva debe incluir los costos directos e indirectos asociados a la administración de los siniestros. El componente de costos indirectos se deberá constituir de manera agregada para cada ramo.
+
+La entidad aseguradora deberá escoger si el cálculo de esta reserva para cada ramo se hará sobre la base de siniestros incurridos o pagados. Solo se podrá modificar la base de siniestros previa justificación y no objeción de la SFC.
+
+Para el cálculo de esta reserva, la entidad aseguradora deberá contar como mínimo, con cinco (5) años de información siniestral propia y con diez (10) años para los ramos de seguro de riesgos laborales, previsionales de invalidez y sobrevivencia y los amparos de responsabilidad civil y cumplimiento.
+
+Para la operación de un nuevo ramo de seguros, la aseguradora deberá presentar en la nota técnica una metodología alternativa de cálculo de esta reserva la cual utilizará mientras cuenta con la información mínima requerida.
+
+La entidad aseguradora podrá separar para un ramo la siniestralidad en función de uno o varios amparos o coberturas o agrupar más de un ramo con características siniestrales similares, siempre que no exista objeción por parte de la SFC.
+
+En cualquier caso, la cobertura de responsabilidad civil y el ramo de SOAT no podrán ser agrupados con otras coberturas o ramos.
+
+Cuando se revoque la autorización otorgada para operar un ramo o se suspenda el ofrecimiento de todos los productos que se explotan en uno determinado, la entidad aseguradora está obligada a continuar con el cálculo de esta reserva hasta que haya transcurrido el término de prescripción previsto en la ley para ejercer las acciones derivadas de todos los contratos de seguro celebrados durante el período de operación del ramo.
+
+
+
+## FUTURO – PRIMAS
+
+
+### Reserva de riesgos en curso
+
+Según el Decreto 2555 de 2010, la reserva de riesgos en curso se define como:
+
+La reserva que debe constituir la entidad aseguradora para atender el pago de los siniestros que puedan ocasionarse después de la fecha de cálculo y hasta el vencimiento de las vigencias futuras derivadas de los riesgos asumidos en las pólizas vigentes, por la porción de prima no devengada.
+
+El cálculo de la reserva de riesgo en curso para el seguro de terremoto se realizará utilizando el sistema de póliza a póliza. Las compañías de seguros constituirán una reserva equivalente al 100% de la prima pura de riesgo de la cartera retenida de cada entidad. Estos fondos de reserva se destinarán al pago de siniestros en la cartera retenida o se utilizarán de acuerdo con las características del modelo póliza a póliza, incluida su posible asignación a la reserva de riesgos catastróficos, según lo establecido en el artículo 2.31.5.1.3 de este decreto y para el pago de siniestros de la cartera retenida derivados de la ocurrencia de un evento sísmico, en cuyo caso la liberación solo será procedente cuando se agote la reserva de riesgo en curso de la cartera afectada.
+
+
+Ámbito de aplicación de la reserva de riesgos en curso. Esta reserva se aplica para todos los ramos y amparos del contrato de seguro, con excepción de:
+
+<p style="margin-left: 40px;">
+**a)** Vida individual, amparos adicionales para los cuales la prima haya sido calculada en forma nivelada o se les calcule reserva matemática, y fondos de ahorro.
+</p>
+
+<p style="margin-left: 40px;">
+**b)** Pensiones Ley 100.
+</p>
+
+<p style="margin-left: 40px;">
+**c)** Pensiones con conmutación pensional.
+</p>
+
+<p style="margin-left: 40px;">
+**d)** Pensiones voluntarias
+</p>
+
+<p style="margin-left: 40px;">
+**e)** Seguro educativo.
+</p>
+
+<p style="margin-left: 40px;">
+**f)** Rentas voluntarias.
+</p>
+
+<p style="margin-left: 40px;">
+**g)** Riesgos laborales.
+</p>
+
+
+
+### Reserva de prima No devengada (RPND)
+
+El artículo 2.31.4.2.2 del Decreto 2973 de 2013 define la prima no devengada como la representación de la porción de las primas emitidas de las pólizas vigentes y de las primas emitidas de las pólizas con inicio de vigencia futura, descontados los gastos de expedición, correspondiente al tiempo no corrido del riesgo. 
+
+La reserva de prima no devengada no se aplica al seguro previsional de invalidez y sobrevivencia. En el caso del ramo de SOAT, se determinará la prima emitida después de realizar la compensación entre entidades y se distribuirá dicha compensación de acuerdo con cada póliza correspondiente.
+
+El decreto 1531 de 2022 modifica el artículo 2.31.4.2.2 del Decreto 2555 de 2010 referente a la metodología de cálculo de la reserva de prima no devengada se aplica a todas las pólizas y/o riesgos vigentes o con inicio de vigencia futura, y se realiza de manera desagregada por cada póliza, amparo y riesgo asegurado. Esta reserva se calcula como:
+
+$$
+[ \max(\text{ prima comercial sin descuentos}, \text{ prima emitida}) - \text{gastos de expedición}] * \text{Fracción Riesgo no corrido}
+$$
+
+donde los gastos de expedición son causados al momento de la emisión de la póliza, conforme a las políticas contables de diferimiento de cada entidad y la fracción de riesgo no corrido es relativo a la fecha de cálculo. 
+
+El cálculo de la reserva se ajusta según la duración de la vigencia de la póliza, y para aquellas con vigencia indeterminada, la SFC establecerá la metodología para determinar una fecha de fin de vigencia.
+
+La fracción de riesgo considera la distribución de la frecuencia y severidad de los siniestros y gastos asociados durante la vigencia de cada póliza. Si la frecuencia de siniestralidad es alta y la severidad baja, se asume una distribución uniforme de la fracción de riesgo.
+
+En casos de distribución no uniforme del riesgo durante la vigencia de la póliza, la aseguradora debe calcular actuarialmente la fracción del riesgo no corrido basada en la siniestralidad esperada, y presentar a consideración de la SFC la metodología de cálculo y la información utilizada.
+
+El cálculo para pólizas o amparos con una vigencias igual o inferior a un mes:
+
+$$
+[ \max(\text{ prima comercial sin descuentos}, \text{ prima emitida}) - \text{gastos de expedición}] * \max(\text{ Fracción Riesgo no corrido}, 0.5)
+$$
+
+
+### Reserva de insuficiencia de prima
+
+El decreto 2973 de 2013 define la reserva por insuficiencia de primas como un fondo que las entidades aseguradoras deben constituir para hacer frentes a situaciones donde los ingresos generados por las primas son insuficientes para cubrir los costos asociados a los siniestros y gastos.
+
+La reserva por insuficiencia de primas se calculará y ajustará mensualmente en aquellos ramos que no tengan un régimen especial para su estimación. Se basará en los dos últimos años y se determinará mediante:
+
+$$
+\textbf{a)     }\left[ \max\left(0, \frac{\text{ egresos - ingresos}}{\text{primas devengadas}}\right) \right] \% 
+$$
+
+$$
+\textbf{b)     }\text{ saldo de la RPND en la fecha de cálculo}
+$$
+
+Dentro de los egresos del ramo se incluirán los siniestros incurridos netos de salvamentos y recobros, los egresos derivados de reaseguros proporcionales y no proporcionales, así como los gastos administrativos, de expedición y los asociados a la gestión de activos que respaldan las reservas técnicas, causados en los dos últimos años hasta la fecha de cálculo. Se podrán excluir siniestros de baja frecuencia y alta severidad, previa presentación del sustento actuarial ante la SFC.
+
+En los ingresos se considerarán las primas devengadas, los ingresos de contratos proporcionales y no proporcionales, así como los ingresos financieros generados en los dos últimos años hasta la fecha de cálculo.
+
+La SFC establecerá los criterios y procedimientos para calcular esta reserva, así como los ingresos y egresos relevantes para su cálculo.
+
+No se permitirán compensaciones entre diferentes ramos para esta reserva. Si la insuficiencia de primas se presenta de manera consecutiva durante doce meses, la entidad aseguradora deberá revisar y ajustar las tarifas.
+
+Las aseguradoras podrán emplear métodos prospectivos para calcular esta reserva, siempre que hayan pasado dos años desde la aplicación del método descrito en este artículo y no exista objeción por parte de la SFC.
+
+Para todos los ramos, excepto el seguro previsional de invalidez y sobrevivencia, al iniciar la operación de uno nuevo, esta reserva se comenzará a calcular doce meses después de emitir la primera póliza y se extenderá mensualmente hasta completar dos años.
+
+En caso de revocación de la autorización para operar un ramo o suspensión de todos los productos en un ramo específico, la entidad aseguradora deberá continuar calculando esta reserva hasta que expire la vigencia de todas las pólizas suscritas, utilizando el último porcentaje calculado en el mes anterior a la revocación o suspensión, a menos que la cartera se transfiera completamente a otra entidad.
+

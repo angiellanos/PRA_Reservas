@@ -2,18 +2,50 @@
 title: "NORMAS APLICABLES A LAS RESERVAS TÉCNICAS"
 author: "Jose Alejandro Ramírez - Angie Llanos Culma - Cristian Gonzalez Morales"
 date: "2024-04-21"
-output: html_document
+output: 
+  html_document:
+    css: style.css
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+
 ---
+
 <style>
 p {
   margin-bottom: 2em;
 }
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+h1 {
+  color: #1F4E79;
+  border-bottom: 2px solid #1F4E79;
+}
+h2 {
+  color: #4F81BD;
+}
+h3 {
+  color: #385D8A;
+}
+code {
+  background-color: #F4F4F4;
+  border: 1px solid #CCCCCC;
+}
+pre {
+  background-color: #F4F4F4;
+  border: 1px solid #CCCCCC;
+}
+
 </style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Establece la localización a inglés UTF-8 para evitar problemas de codificación
 Sys.setlocale("LC_ALL", "English_United States.UTF-8")
+knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, warning = FALSE)
 
 ```
 

@@ -1,0 +1,125 @@
+---
+title: "Ejemplo de Cálculo de la Reserva de Riesgos en Curso"
+author: "Jose Alejandro Ramírez - Angie Llanos Culma - Cristian Gonzales Morales"
+date: "2024-04-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+En este documento se presenta un ejemplo del cálculo de la reserva de riesgos en curso según el decreto 2555 de 2010, el decreto 2973 de 2013 y el decreto 1531 de 2022. Los datos utilizados corresponden a una muestra de 991 riesgos vigentes  asociados a 250 contratos de seguro en el "Ramo de Automóviles" cuyos valores están en COP (datos anonimizados).
+
+
+## Reserva de Prima No Devengada
+```{r, echo = FALSE}
+library(readxl)
+datos <- read_excel("C:/Users/joser/OneDrive/Escritorio/CALCULO_RPND/RIESGOS_VIGENTES_IN_ANONIMO.xlsx", sheet = "RIESGOS_VIGENTES")
+```
+
+La dimensión de la tabla de datos es:
+
+```{r, echo = FALSE}
+dim(datos)
+```
+Se presentan las filas 113 a 120 de la tabla de datos:
+```{r, echo = FALSE}
+library(knitr)
+kable((datos[113:120,]))
+```
+Los límites de la variable "Fecha inicio de vigencia" son:
+```{r, echo = FALSE}
+min(datos$FECHA_INICIO_VIG)
+max(datos$FECHA_INICIO_VIG)
+```
+Los límites de la variable "Fecha fin de vigencia" son:
+```{r, echo = FALSE}
+min(datos$FECHA_FIN_VIG)
+max(datos$FECHA_FIN_VIG)
+```
+La distribución de la variable "Prima Comercial" es:
+
+```{r, echo =FALSE}
+hist(datos$PRIMA_COMERCIAL, col = "blue", main = "Histograma de Prima Comercial")
+```
+
+```{r, echo = FALSE}
+library(formattable)
+```
+
+El valor total de la variable "Prima Comercial" es:
+```{r}
+currency(sum(datos$PRIMA_COMERCIAL))
+```
+
+```{r pressure, echo=FALSE}
+datos$maximo <- apply(datos[, c("PRIMA_COMERCIAL", "PRIMA_COMERCIAL_SIN_DCTO")], 1, max)
+datos$dias_vigencia = datos$FECHA_FIN_VIG - datos$FECHA_INICIO_VIG
+
+fecha_corte = "2023-12-31"
+fecha_corte <- as.POSIXct(fecha_corte)
+datos$fecha_corte = fecha_corte
+
+datos$maximo_fecha <- apply(datos[, c("fecha_corte", "FECHA_INICIO_VIG")], 1, max)
+
+datos$resta_fechas <- numeric(length(datos$FECHA_FIN_VIG))
+for (i in 1:length(datos$FECHA_FIN_VIG)){
+datos$resta_fechas[i] =  datos$FECHA_FIN_VIG[i] - as.POSIXct(datos$maximo_fecha)[i]
+}
+
+datos$resta_fechas_aprox <- apply(datos[, "resta_fechas", drop = FALSE], 2, ceiling)
+
+datos$frac_riesgo_noc_ini = datos$resta_fechas_aprox/as.numeric(datos$dias_vigencia)
+
+datos$frac_riesgo_noc_def <- ifelse(datos$dias_vigencia > 30, datos$frac_riesgo_noc_ini, 0.5)
+
+datos$RvaNoDev = (datos$maximo - datos$GASTOS_EXPEDICION)*datos$frac_riesgo_noc_def
+
+RPND = sum(datos$RvaNoDev)
+```
+Se define la fecha de corte:
+```{r, echo = FALSE}
+fecha_corte
+```
+Se realiza el cálculo del máximo entre la prima comercial (prima emitida) y la prima comercial sin descuentos. Posteriormente se calcula la fracción de riesgo no corrido y la reserva de prima no devengada por amparo. Se presentan los cálculos para las filas 113 a 120 de la tabla de datos:
+```{r, echo = FALSE}
+library(knitr)
+
+kable(subset(datos[113:120,], select = -c(maximo, dias_vigencia, fecha_corte,maximo_fecha,resta_fechas,frac_riesgo_noc_ini)))
+```
+Finalmente, el saldo se calcula como la sumatoria de la reserva de prima no devengada para todos los riesgos vigentes:
+```{r}
+RPND = sum(datos$RvaNoDev)
+print(currency(RPND))
+```
+
+## Reserva de Insuficiencia de Prima
+Se presenta un informe mensualizado de ingresos y egresos del Ramo de Automóviles para una ventana de 2 años que corresponde a los periodos 2022 y 2023 respectivamente. Se muestran las últimos 6 filas de la tabla que corresponden a los ultimos meses del año 2023: 
+```{r, echo = FALSE}
+datos_rip <- read_excel("C:/Users/joser/OneDrive/Escritorio/CALCULO_RPND/RIESGOS_VIGENTES_IN_ANONIMO.xlsx", sheet = "RIP")
+kable(tail(datos_rip))
+```
+Se calculan los totales, tanto de ingresos como de egresos. Posteriormente se calculan las diferencias por mes así como el factor de insufuciencia. A continuación se presentan los calculos realizados para cada periodo:    
+```{r, echo = FALSE}
+datos_rip$TOTAL_INGRESOS = datos_rip$PRIMA_DEVENGADA+datos_rip$INGRESOS_REASEGUROS+datos_rip$INGRESOS_FINANCIEROS
+
+datos_rip$TOTAL_EGRESOS = datos_rip$EGRESOS_SINIESTROS+datos_rip$EGRESOS_FINANCIEROS+datos_rip$EGRESOS_OTROS
+
+datos_rip$DIFERENCIA = datos_rip$TOTAL_EGRESOS - datos_rip$TOTAL_INGRESOS
+
+datos_rip$DIFERENCIA_cumsum = cumsum(datos_rip$DIFERENCIA)
+datos_rip$PRIMA_DEVENGADA_cumsum = cumsum(datos_rip$PRIMA_DEVENGADA)
+
+datos_rip$FACTOR <- numeric(length(datos_rip$DIFERENCIA_cumsum))
+for (i in 1:length(datos_rip$DIFERENCIA_cumsum)){
+  datos_rip$FACTOR[i] = max(0, datos_rip$DIFERENCIA_cumsum[i]/datos_rip$PRIMA_DEVENGADA_cumsum[i])
+}
+kable(subset(datos_rip, select = -c(INGRESOS_REASEGUROS,	INGRESOS_FINANCIEROS,	EGRESOS_SINIESTROS,	EGRESOS_FINANCIEROS,	EGRESOS_OTROS)))
+```
+Finalmente, la reserva de insuficiencia de prima se calcula como el producto del factor de insuficiencia para una ventana de 2 años y el saldo de la reserva de prima no devengada:
+```{r}
+RIP = datos_rip$FACTOR[24]*RPND
+print(currency(RIP))
+```

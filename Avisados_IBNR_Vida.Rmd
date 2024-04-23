@@ -1,34 +1,87 @@
 ---
-title: "Avisados_IBNR_Vida"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(ChainLadder)
+library(readxl)
+source("IBNR_calculo_completo.R")
 
+knitr::kable(Reportados, caption = "Tabla de Siniestros Incurridos")
+```
+
+# **PROYECCIÓN IBNR Y CASE OUTSTANDING (VIDA)**
+
+## Introducción
+
+En el análisis actuarial para seguros de vida, es fundamental estimar adecuadamente las reservas necesarias para reclamaciones futuras. Este documento explica la elección de las distribuciones de Poisson y Log-normal para simular los triángulos de reclamaciones reportadas y pagadas, así como la metodología para calcular las reservas IBNR y case outstanding.
+
+## Metodología
+
+### Selección de Distribuciones
+
+Las distribuciones de **Poisson** y **Log-normal** se seleccionan por las siguientes razones:
+
+- **Poisson**: Apropiada para modelar el número de reclamaciones, ya que se asume que los eventos ocurren de manera independiente a una tasa constante. Es particularmente útil en seguros donde los eventos (como la muerte) son raros en relación con la población expuesta.
+
+- **Log-normal**: Utilizada para modelar la severidad de las reclamaciones, pues los montos de reclamaciones tienden a no ser negativos y están sesgados hacia la derecha. Esto es, la mayoría de las reclamaciones pueden ser de montos bajos a moderados, pero hay una posibilidad de que ocurran reclamaciones extremadamente altas.
+
+### Simulación de Triángulos
+
+Se simulan dos triángulos: uno para reclamaciones reportadas y otro para reclamaciones pagadas. Cada triángulo incrementa acumulativamente, asegurando que las reclamaciones futuras sean siempre mayores o iguales a las anteriores, reflejando la naturaleza acumulativa de los datos de reclamaciones.
+
+## Resultados
+
+Triángulo de siniestros incurridos
+
+```{r echo=FALSE}
+Reportados
+```
+
+Triángulo de siniestros pagados
+
+```{r echo=FALSE}
+Pagados
 ```
 
 
 
 
 
+```{r results='asis', echo=FALSE}
+library(knitr)
+library(kableExtra)
 
-## R Markdown
+kable(ultimate_proj, caption = "Proyecciones de Reclamaciones Finales") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) %>%
+  column_spec(1, bold = TRUE, color = "blue") %>%
+  column_spec(2:5, background = "#D3D3D3")
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+kable(dev_unpaid_claims, caption = "Desarrollo de Reclamaciones No Pagadas") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE) %>%
+  column_spec(1, bold = TRUE, color = "blue") %>%
+  column_spec(2:5, background = "#FFD700")
 ```
 
-## Including Plots
+### **Conclusiones:**
 
-You can also embed plots, for example:
+<p style="margin-left: 40px;">
+**1)** Los triángulos de reclamaciones reportadas y pagadas muestran una tendencia creciente con el tiempo, lo cual es consistente con lo que se esperaría de las reclamaciones en el seguro de vida, donde los costos pueden aumentar debido a la inflación y otros factores económicos.
+</p>
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+<p style="margin-left: 40px;">
+**2)** La proyección de reclamaciones finales refleja el total esperado de pagos que se tendrán que realizar en el futuro. Esto incluye tanto las reclamaciones ya conocidas como las IBNR. Es notable que los valores de las reclamaciones IBNR son significativos, lo que destaca la importancia de tener en cuenta estos montos al calcular las reservas necesarias.
+</p>
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+<p style="margin-left: 40px;">
+**3)** Las diferencias entre las reclamaciones reportadas y los pagos (case outstanding) pueden indicar los montos que la compañía espera pagar en el futuro cercano. Los valores IBNR representan las obligaciones que aún no se han reportado pero que se esperan basadas en la experiencia pasada y las tendencias actuales.
+</p>
+
+### **Resultados:**
+
+•	Se observa que en los últimos años, hay una gran cantidad de reservas IBNR, lo que puede deberse a políticas que están llegando a su madurez o a un retraso en el proceso de reclamación.
+
+•	La evolución de las reclamaciones y los pagos también puede ofrecer insights sobre la efectividad de la gestión de reclamaciones y el proceso de pago de la compañía.
+
+

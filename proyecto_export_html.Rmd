@@ -49,11 +49,11 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, warning = FALS
 
 ```
 
-#  Vida (seguro temporal n años)
+#  **VIDA (SEGURO TEMPORAL N AÑOS)**
 
-## PASADO - RECLAMACIONES
+# Pasado - Reclamaciones
 
-### Reserva Avisados
+## RESERVA AVISADOS
 
 
 Según la modificación del inciso primero del artículo 2.31.4.41 del decreto 2555 de 2010 por parte del decreto 1531 de 2022 la reserva de siniestros avisados es de aplicación obligatoria para todos los ramos y deberá constituirse por siniestro y para cada cobertura, en la fecha en que la aseguradora tenga conocimiento, por cualquier medio, de la ocurrencia del siniestro y corresponderá a la mejor estimación técnica del costo de este. Esta reserva debe incluir los costos directos e indirectos asociados a la gestión de los siniestros. El componente de costos indirectos se deberá constituir de manera agregada para cada ramo. En aquellos ramos de seguros en los cuales al momento del aviso del siniestro no se conozca dicho costo, la valuación deberá consistir en una proyección de pagos futuros basada en estadísticas de pago de siniestros de años anteriores por cada tipo de cobertura.
@@ -65,18 +65,20 @@ La Superintendencia Financiera de Colombia (SFC) establecerá parámetros adicio
 Esta reserva se liberará en función del pago total o parcial del siniestro, incluidos los costos asociados al siniestro, reducción del valor estimado del siniestro, desistimientos y prescripciones
 
 
-### IBNR
+## RESERVA IBNR
 
 
 Los seguros de vida temporales se distinguen por ser contratados para un periodo de tiempo específico y están diseñados para cubrir necesidades individuales de los asegurados. Estos seguros temporales pueden tener distintos períodos de vigencia pueden ir de uno, cinco, diez o más. Según las normativas actuales, los seguros de vida temporal están obligados a establecer una reserva matemática. Los seguros están exentos de formar la reserva para siniestros ocurridos, pero no avisados. Sin embargo, el artículo 1531 de 2022 que modifica el inciso a del artículo 2.31.4.4.6 del decreto 2555 de 2010 establece que dentro del ámbito de la aplicación la reserva de siniestros ocurridos no avisados, se incluyen específicamente los siguientes tipos de seguros: vida individual, amparos adicionales que requieran una prima nivelada o que tengan una reserva matemática asociada, así como fondos de ahorro. Sin embargo, se hace una excepción para los planes temporales, indicando que, independientemente de la metodología utilizada para calcular la prima, estos planes también deben constituir la reserva de siniestros ocurridos no avisados
 
 
 
+Ejemplo de [Reserva avisados e IBNR](Avisados_IBNR_Vida.html).
 
-## FUTURO - PRIMAS
+
+# Futuro - Primas
 
 
-### Reserva matemática
+## RESERVA MATEMÁTICA
 
 
 según el Decreto 2555 de 2010, la reserva matemática se define como la reserva que tiene por objeto cubrir la valoración de las obligaciones estipuladas en las pólizas de seguros de vida individual, rentas vitalicias, capitalizaciones y aquellas que así lo determinen las normas vigentes. Se constituirá para los seguros de vida individual y para los amparos cuya prima se calcule en forma nivelada o seguros cuyo beneficio se pague en forma de renta. La SFC determinará la obligación o no de constituir esta reserva para otros ramos de seguros.
@@ -126,12 +128,12 @@ $$
 La SFC tendrá la facultad de determinar si otros tipos de seguros deben también constituir esta reserva o no.
 
 
-Ejemplo de reserva matemática [Reserva Matemática](R_Mat.html).
+Ejemplo de [Reserva Matemática](R_Mat.html).
 
 
 
 
-### Reserva por insuficiencia de activos 
+## RESERVA POR INSUFICIENCIA DE ACTIVOS
 
 
 Es la reserva que deberán constituir las aseguradoras con el objeto de respaldar los pagos de sus obligaciones, en los casos en que los activos que conforman las reservas técnicas no sean suficiente de cubrirlas 
@@ -153,7 +155,7 @@ $$
 La SFC se encarga de definir el procedimiento para calcular esta reserva, incluyendo aspectos como los activos y pasivos a considerar, sus flujos y el tratamiento respectivo, los tramos temporales para calcular las deficiencias, así como la tasa de descuento aplicable para determinar el valor presente de la insuficiencia.
 
 
-#### Ámbito de aplicación de la reserva por insuficiencia de activos. 
+### Ámbito de aplicación de la reserva por insuficiencia de activos. 
 
 Esta reserva es de aplicación obligatoria para los siguientes ramos de seguros: 
 
@@ -186,18 +188,18 @@ Esta reserva es de aplicación obligatoria para los siguientes ramos de seguros:
 </p>
 
 
-#  Generales (automóviles)
+#  **GENERALES (AUTOMÓVILES)**
 
-## PASADO - RECLAMACIONES
+# Pasado - Reclamaciones
 
-### Reserva Avisados
+## RESERVA AVISADOS
 
 
 Equivalente a la reserva de avisados para el producto de vida (temporal a n años). Para más información consulte el inicio del documento.
 
 
 
-### IBNR
+## RESERVA IBNR
 
 La reserva de siniestros ocurridos no avisados representa una estimación del monto de recursos que debe destinar la entidad aseguradora para atender los futuros pagos de siniestros que ya han ocurrido, a la fecha de cálculo de esta reserva, pero que todavía no han sido avisados a la entidad aseguradora o para los cuales no se cuenta con suficiente información.
 
@@ -221,11 +223,13 @@ En cualquier caso, la cobertura de responsabilidad civil y el ramo de SOAT no po
 Cuando se revoque la autorización otorgada para operar un ramo o se suspenda el ofrecimiento de todos los productos que se explotan en uno determinado, la entidad aseguradora está obligada a continuar con el cálculo de esta reserva hasta que haya transcurrido el término de prescripción previsto en la ley para ejercer las acciones derivadas de todos los contratos de seguro celebrados durante el período de operación del ramo.
 
 
+Ejemplo de [Reserva avisados e IBNR](Ejemplo_calculo_de_reserva_de_avisados_e_IBNR_Automoviles.html).
 
-## FUTURO – PRIMAS
+
+# Futuro – Primas
 
 
-### Reserva de riesgos en curso
+## RESERVA DE RIESGOS EN CURSO
 
 Según el Decreto 2555 de 2010, la reserva de riesgos en curso se define como:
 
@@ -265,8 +269,9 @@ El cálculo de la reserva de riesgo en curso para el seguro de terremoto se real
 </p>
 
 
-
-### Reserva de prima No devengada (RPND)
+<p style="margin-left: 40px;">
+### RESERVA DE PRIMA NO DEVENGADA (RPND)
+</p>
 
 El artículo 2.31.4.2.2 del Decreto 2973 de 2013 define la prima no devengada como la representación de la porción de las primas emitidas de las pólizas vigentes y de las primas emitidas de las pólizas con inicio de vigencia futura, descontados los gastos de expedición, correspondiente al tiempo no corrido del riesgo. 
 
@@ -293,7 +298,9 @@ $$
 $$
 
 
-### Reserva de insuficiencia de prima
+<p style="margin-left: 40px;">
+### RESERVA DE INSUFICIENCIA DE PRIMA
+</p>
 
 El decreto 2973 de 2013 define la reserva por insuficiencia de primas como un fondo que las entidades aseguradoras deben constituir para hacer frentes a situaciones donde los ingresos generados por las primas son insuficientes para cubrir los costos asociados a los siniestros y gastos.
 
@@ -321,3 +328,6 @@ Para todos los ramos, excepto el seguro previsional de invalidez y sobrevivencia
 
 En caso de revocación de la autorización para operar un ramo o suspensión de todos los productos en un ramo específico, la entidad aseguradora deberá continuar calculando esta reserva hasta que expire la vigencia de todas las pólizas suscritas, utilizando el último porcentaje calculado en el mes anterior a la revocación o suspensión, a menos que la cartera se transfiera completamente a otra entidad.
 
+
+
+Ejemplo de [Reserva de riesgos en curso](Ejemplo_de_calculo_de_la_Reserva_de_Riesgos_en_Curso.html).
